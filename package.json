@@ -1,0 +1,16 @@
+{
+  "name": "api-chinchin",
+  "version": "0.1.0",
+  "description": "prueba backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "José Medina",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  },
+  "type": "module"
+}
