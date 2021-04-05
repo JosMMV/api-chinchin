@@ -8,7 +8,7 @@
 
 >`npm i`
 
-ó en caso de tener instalado [yarn](https://yarnpkg.com/):
+ó, en caso de tener instalado [yarn](https://yarnpkg.com/), use el comando:
 
 >`yarn`
 
@@ -19,4 +19,4 @@
 ## Hay dos formas de consumir la API:
 
 1. A través del link <http://localhost:3000> se retornará un JSON con el equivalente de la unidad de cada moneda (BTC, ETH, DASH, EUR, PTR y VEF) en USD.
-2. A través del link <http://localhost:3000?usd=amount> (donde **amount** debe ser reemplazado por un número mayor a 0)
+2. A través del link <http://localhost:3000?usd=amount> (donde **amount** debe ser reemplazado por un número mayor a 0) se retornará el valor del parámetro usd en todas las monedas antes mencionadas.
