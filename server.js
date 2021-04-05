@@ -21,7 +21,8 @@ const optionsCurrency = {
 app.get('/', async (req, res) => {
   try {
     const { usd } = req.query
-    if (isNaN(usd)) throw new Error('Debe pasar un número como parámetro')
+
+    if (!!usd && isNaN(usd)) throw new Error('Debe pasar un número como parámetro')
     if (usd <= 0) throw new Error('El número debe ser mayor a 0')
 
     const exchange = []
@@ -78,18 +79,23 @@ app.get('/', async (req, res) => {
     }
 
     try {
-      const response3 = await axios.post(
-        '/price',
-        {
-          coins: ['USD', 'PTR'],
-          fiats: ['Bs']
-        },
-        {
-          baseURL: 'https://petroapp-price.petro.gob.ve',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+      const response3 = await Promise.race([
+        axios.post(
+          '/price',
+          {
+            coins: ['USD', 'PTR'],
+            fiats: ['Bs']
+          },
+          {
+            baseURL: 'https://petroapp-price.petro.gob.ve',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }),
+        new Promise((_, reject) => setTimeout(
+          () => reject(new Error('Timeout')), 6000
+        ))
+      ])
 
       vef = response3.data.data.USD.BS
       ptr = response3.data.data.PTR.BS / vef
