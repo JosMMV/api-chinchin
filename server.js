@@ -1,4 +1,4 @@
-import express, { response } from 'express'
+import express from 'express'
 import env from 'dotenv'
 import axios from 'axios'
 
@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
     const { usd } = req.query
 
     if (!!usd && isNaN(usd)) throw new Error('Debe pasar un número como parámetro')
-    if (usd <= 0) throw new Error('El número debe ser mayor a 0')
+    if (!!usd && usd <= 0) throw new Error('El número debe ser mayor a 0')
 
     const exchange = []
     let vef = +process.env.VEF
